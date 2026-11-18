@@ -1,4 +1,4 @@
-name: Deploy ProtoWiki to GitHub Pages
+name: Deploy Spanish ProtoWiki to GitHub Pages
 
 on:
   push:
@@ -18,26 +18,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
+      - name: Extract participant prototype source
+        run: unzip -q prototype-source.zip
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
-
+          cache-dependency-path: prototype/package-lock.json
       - name: Install dependencies
+        working-directory: prototype
         run: npm ci
-
-      # Patched at site root + stock under codex/stock/ when patches/codex/ holds a patch.
-      - name: Build
-        run: npm run build
+      - name: Build Spanish participant prototype
+        working-directory: prototype
+        run: npm run build:vite
         env:
           PROTOWIKI_BASE: /${{ github.event.repository.name }}/
-
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: dist
-          clean-exclude: pr-preview/
+          folder: prototype/dist
           force: false
