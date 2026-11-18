@@ -1,0 +1,1 @@
+import{D as o}from"./DashboardPage-B51B537w.js";import{c as r,o as a}from"./index-Cjpuir5r.js";import"./SpecialPageWrapper-0UHoFt5_.js";import"./DashboardModule.vue_vue_type_style_index_0_lang-CM7r_sSl.js";const n={__name:"index",setup(e){return(t,c)=>(a(),r(o))}};export{n as default};
